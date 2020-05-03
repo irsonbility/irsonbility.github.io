@@ -20,17 +20,20 @@ var mystate = new huiFu(65, 45);//创建实例
 function bigHp(){
     var HP = document.getElementById("HPvalue");
     mystate.bigHP();//实例继承了类方法
-    if(mystate.HP < 301){
     var beforeX = mystate.HP - 64;//之前的血量
     var xue = document.getElementById("xue");//红色方块元素
+    if(mystate.HP > 301){
+    mystate.HP = 301;
+    }
     HP.innerHTML = mystate.HP + '/' + 301;
     if(mystate.HP >  200){ 
         var color = "green";
         xue.style.background = color;
     }// js 没有块级的作用域，而且是词法作用域
-    var animationModel = [{width: beforeX+"px",background: "red"},{width: mystate.HP +"px",background: color}];//动画的模型
+    if(mystate.HP <= 301){
+    var animationModel = [{width: beforeX+"px"},{width: mystate.HP +"px",background: color}];//动画的模型
     var animationTime ={ duration: 3000}//时序模型
     xue.animate(animationModel,animationTime);//将模型传入animate方法
-    xue.style.width = mystate.HP +"px";//记录每次动画的HP值 去掉的话动画后没有宽度
     }
+    xue.style.width = mystate.HP +"px";//记录每次动画的HP值 去掉的话动画后没有宽度
 }
